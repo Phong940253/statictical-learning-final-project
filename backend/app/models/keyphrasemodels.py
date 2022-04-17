@@ -4,7 +4,6 @@ from xmlrpc.client import DateTime
 from sqlalchemy import Column, BigInteger, ForeignKey, DateTime, Integer, Boolean, String
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
-from backend.app.models.questionmodels import Question
 from config.database import Base
 
 
@@ -19,4 +18,4 @@ class Keyphrase(Base):
     keyphrase_noidung = relationship(
         "KeyphraseNoiDung",
         back_populates="keyphrase",
-        casade="all, delete")
+        cascade="all, delete")

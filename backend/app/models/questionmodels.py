@@ -14,12 +14,12 @@ class Question(Base):
     test = relationship(
         "Test",
         back_populates="question",
-        casade="all, delete")
+        cascade="all, delete")
     id_noidung = Column(BigInteger, ForeignKey("noidung.id"))
     noidung = relationship(
         "Noidung",
         back_populates="question",
-        casade="all, delete")
+        cascade="all, delete")
     order = Column(Integer, default=0)
     correct = Column(Boolean, default=False)
     create_at = Column(DateTime, server_default=func.now())

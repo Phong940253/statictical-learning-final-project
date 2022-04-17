@@ -4,7 +4,6 @@ from xmlrpc.client import DateTime
 from sqlalchemy import Column, BigInteger, ForeignKey, DateTime, Integer, Boolean, String
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
-from backend.app.models.questionmodels import Question
 from config.database import Base
 
 
@@ -21,8 +20,8 @@ class Chuong(Base):
     noidung = relationship(
         "Noidung",
         back_populates="chuong",
-        casade="all, delete")
+        cascade="all, delete")
     phanmuc = relationship(
         "PhanMuc",
         back_populates="phanmuc",
-        casade="all, delete")
+        cascade="all, delete")

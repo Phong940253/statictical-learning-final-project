@@ -19,4 +19,4 @@ class User(Base):
     create_at = Column(DateTime, server_default=func.now())
     update_at = Column(DateTime, onupdate=func.now())
 
-    test = relationship("Test", back_populates="user", casede="all, delete")
+    test = relationship("Test", back_populates="user", cascade="all, delete")

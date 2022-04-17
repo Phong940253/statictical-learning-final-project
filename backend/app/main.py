@@ -3,12 +3,16 @@ from config.database import engine
 from config.database import Base
 from auth import authrouter
 from users import usersrouter
-from review import reviewrouter
-from product import productrouter
-from order import orderrouter
+from chuong import chuongrouter
+from tests import testrouter
+from phanmuc import phanmucrouter
+from keyphrase import keyphraserouter
+from keyphrasenoidung import keyphrasenoidungrouter
+from noidung import noidungrouter
+from question import questionrouter
+
 
 from fastapi.middleware.cors import CORSMiddleware
-
 
 app = FastAPI()
 
@@ -33,6 +37,10 @@ def hello():
 
 app.include_router(authrouter.router)
 app.include_router(usersrouter.router)
-app.include_router(reviewrouter.router)
-app.include_router(productrouter.router)
-app.include_router(orderrouter.router)
+app.include_router(testrouter.router)
+app.include_router(questionrouter.router)
+app.include_router(noidungrouter.router)
+app.include_router(chuongrouter.router)
+app.include_router(phanmucrouter.router)
+app.include_router(keyphraserouter.router)
+app.include_router(keyphrasenoidungrouter.router)

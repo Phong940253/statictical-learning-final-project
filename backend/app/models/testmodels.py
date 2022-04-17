@@ -12,7 +12,7 @@ class Test(Base):
     id = Column(BigInteger, primary_key=True, index=True)
     score = Column(SmallInteger, default=0)
     id_user = Column(BigInteger, ForeignKey("user.id"))
-    user = relationship("User", back_populates="test", casade="all, delete")
+    user = relationship("User", back_populates="test", cascade="all, delete")
 
     create_at = Column(DateTime, server_default=func.now())
     update_at = Column(DateTime, onupdate=func.now())
@@ -20,4 +20,4 @@ class Test(Base):
     question = relationship(
         "Question",
         back_populates="test",
-        casade="all, delete")
+        cascade="all, delete")
