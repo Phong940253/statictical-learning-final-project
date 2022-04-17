@@ -19,5 +19,4 @@ class User(Base):
     create_at = Column(DateTime, server_default=func.now())
     update_at = Column(DateTime, onupdate=func.now())
 
-    def __repr__(self):
-        return f"<User {self.email}"
+    test = relationship("Test", back_populates="user", casede="all, delete")
