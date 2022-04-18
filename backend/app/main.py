@@ -1,3 +1,5 @@
+import time
+from urllib.request import Request
 from fastapi import FastAPI
 from config.database import engine
 from config.database import Base
@@ -31,7 +33,7 @@ Base.metadata.create_all(bind=engine)
 
 
 @app.get("/")
-def hello():
+async def hello():
     return "Hello"
 
 
