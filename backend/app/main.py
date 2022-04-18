@@ -8,9 +8,9 @@ from users import usersrouter
 from chuong import chuongrouter
 from tests import testrouter
 from phanmuc import phanmucrouter
+from noidung import noidungrouter
 from keyphrase import keyphraserouter
 from keyphrasenoidung import keyphrasenoidungrouter
-from noidung import noidungrouter
 from question import questionrouter
 
 

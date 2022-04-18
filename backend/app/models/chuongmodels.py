@@ -18,10 +18,10 @@ class Chuong(Base):
     update_at = Column(DateTime, onupdate=func.now())
 
     noidung = relationship(
-        "Noidung",
+        "NoiDung",
         back_populates="chuong",
         cascade="all, delete")
     phanmuc = relationship(
         "PhanMuc",
-        back_populates="phanmuc",
+        back_populates="chuong",
         cascade="all, delete")

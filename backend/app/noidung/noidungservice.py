@@ -1,7 +1,7 @@
 from fastapi import Depends
 from config.database import get_db
 
-from models.noidungmodels import NoiDung
+from models.keyphrasenoidungmodels import NoiDung
 from sqlalchemy.orm import Session
 from dto.userschema import RegisterUser
 from config.hashing import Hashing

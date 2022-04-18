@@ -21,4 +21,4 @@ class PhanMuc(Base):
     create_at = Column(DateTime, server_default=func.now())
     update_at = Column(DateTime, onupdate=func.now())
 
-    noidung = relationship("Noidung", back_populates="phanmuc")
+    noidung = relationship("NoiDung", back_populates="phanmuc")
