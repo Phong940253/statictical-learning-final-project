@@ -23,16 +23,29 @@ import "assets/plugins/nucleo/css/nucleo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/scss/argon-dashboard-react.scss";
 
+import store from "redux/store";
+import { Provider } from "react-redux";
+
 import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Switch>
-      <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-      <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-      <Redirect from="/" to="/admin/index" />
-    </Switch>
-  </BrowserRouter>,
-  document.getElementById("root")
+    <React.StrictMode>
+        <Provider store={store}>
+            <BrowserRouter>
+                <Switch>
+                    <Route
+                        path="/admin"
+                        render={(props) => <AdminLayout {...props} />}
+                    />
+                    <Route
+                        path="/auth"
+                        render={(props) => <AuthLayout {...props} />}
+                    />
+                    <Redirect from="/" to="/admin/index" />
+                </Switch>
+            </BrowserRouter>
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById("root")
 );
