@@ -30,22 +30,16 @@ import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
 
 ReactDOM.render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <BrowserRouter>
-                <Switch>
-                    <Route
-                        path="/admin"
-                        render={(props) => <AdminLayout {...props} />}
-                    />
-                    <Route
-                        path="/auth"
-                        render={(props) => <AuthLayout {...props} />}
-                    />
-                    <Redirect from="/" to="/admin/index" />
-                </Switch>
-            </BrowserRouter>
-        </Provider>
-    </React.StrictMode>,
-    document.getElementById("root")
+  <React.StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+          <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
+          <Redirect from="/" to="/admin/index" />
+        </Switch>
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById("root")
 );
