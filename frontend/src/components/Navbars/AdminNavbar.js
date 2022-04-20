@@ -42,7 +42,9 @@ import {
 const AdminNavbar = (props) => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const dispatch = useDispatch();
-  useEffect(() => {console.log(currentUser)}, [])
+  useEffect(() => {
+    console.log(currentUser);
+  }, []);
 
   return (
     <>
@@ -82,7 +84,7 @@ const AdminNavbar = (props) => {
                     </span>
                     <Media className="ml-2 d-none d-lg-block">
                       <span className="mb-0 text-sm font-weight-bold">
-                        Jessica Jones
+                        {currentUser.name}
                       </span>
                     </Media>
                   </Media>
@@ -118,7 +120,9 @@ const AdminNavbar = (props) => {
                 </DropdownMenu>
               </UncontrolledDropdown>
             ) : (
-              <NavItem><NavLink href="/auth">Login</NavLink></NavItem>
+              <NavItem>
+                <NavLink href="/auth">Login</NavLink>
+              </NavItem>
             )}
           </Nav>
         </Container>
