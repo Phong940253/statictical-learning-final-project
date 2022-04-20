@@ -7,6 +7,6 @@ class RegisterUser(BaseModel):
     name: str
     email: str
     password: str
-    date_of_birth: date
+    date_of_birth: Optional[date]
     verify_at: Optional[datetime]
     verify: Optional[bool]
