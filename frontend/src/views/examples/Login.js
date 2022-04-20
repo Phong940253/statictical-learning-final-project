@@ -110,6 +110,8 @@ const Login = () => {
             <div className="text-center text-muted mb-4">
               <small>Or sign in with credentials</small>
             </div>
+            {loading && <Loader />}
+            {error && <Error error="Invalid Credentials" />}
             <Form role="form" onSubmit={login}>
               <FormGroup className="mb-3">
                 <InputGroup className="input-group-alternative">

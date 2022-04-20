@@ -1,10 +1,10 @@
 export default function Loader() {
   return (
-    <div className="mt-5">
+    <div className="d-flex flex-column">
       <div
-        className="spinner-border mt-5"
+        className="spinner-border align-self-center"
         role="status"
-        style={{ width: "100px", height: "100px" }}
+        style={{ width: "50px", height: "50px" }}
       >
         <span className="sr-only">Loading...</span>
       </div>

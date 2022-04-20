@@ -4,17 +4,21 @@ export const registerUserReducer = (state = {}, action) => {
       return {
         ...state,
         loading: true,
+        success: false,
+        error: false,
       };
     case "USER_REGISTER_SUCCESS":
       return {
         ...state,
         loading: false,
         success: true,
+        error: false,
       };
     case "USER_REGISTER_FAILED":
       return {
         ...state,
         loading: false,
+        success: false,
         error: "User Already Registred",
       };
 
@@ -29,17 +33,21 @@ export const loginReducer = (state = {}, action) => {
       return {
         ...state,
         loading: true,
+        success: false,
+        error: false,
       };
     case "USER_LOGIN_SUCCESS":
       return {
         ...state,
         loading: false,
         success: true,
+        error: false,
       };
     case "USER_LOGIN_FAILED":
       return {
         ...state,
         loading: false,
+        success: false,
         error: "Invalid Credentails",
       };
     case "USER_LOGOUT":
