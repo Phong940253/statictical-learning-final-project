@@ -27,10 +27,11 @@ const Header = () => {
           <div className="header-body">
             {/* Card stats */}
             <Row>
-              <Col lg="6" xl="3"></Col>
-              <Col lg="6" xl="3"></Col>
-              <Col lg="6" xl="3"></Col>
-              <Col lg="6" xl="3"></Col>
+              <Col lg="6" xl="5">
+                <h1 className="display-2 text-white">
+                  Subject: Data Structures
+                </h1>
+              </Col>
             </Row>
           </div>
         </Container>
