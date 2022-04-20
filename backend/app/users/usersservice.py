@@ -18,9 +18,8 @@ class UserService:
         db_user = User(
             name=user.name,
             email=user.email,
-            password=Hashing.bcrypt(user.password),
-            is_staff=user.is_staff,
-            is_active=user.is_active,
+            date_of_birth=user.date_of_birth,
+            password_hash=Hashing.bcrypt(user.password),
         )
 
         db.add(db_user)
@@ -37,8 +36,8 @@ class UserService:
         db_userid.name = user.name
         db_userid.email = user.email
         db_userid.password = Hashing.bcrypt(user.password)
-        db_userid.is_staff = user.is_staff
-        db_userid.is_active = user.is_active
+        db_userid.verify_at = user.verify_at
+        db_userid.verify = user.verify
 
         db.commit()
 
@@ -52,4 +51,3 @@ class UserService:
         db.commit()
 
         return db_userid
-

@@ -1,3 +1,4 @@
+from datetime import date, datetime
 from pydantic import BaseModel
 from typing import Optional
 
@@ -6,5 +7,6 @@ class RegisterUser(BaseModel):
     name: str
     email: str
     password: str
-    is_staff: Optional[bool]
-    is_active: Optional[bool]
+    date_of_birth: date
+    verify_at: Optional[datetime]
+    verify: Optional[bool]
