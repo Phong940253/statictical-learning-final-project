@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from config.database import get_db
-from models.keyphrasenoidungmodels import KeyphraseNoiDung
 from .keyphrasenoidungservice import KeyphraseNoiDungService
 from config.token import get_currentUser
 

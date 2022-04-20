@@ -17,7 +17,7 @@ class Question(Base):
         cascade="all, delete")
     id_noidung = Column(BigInteger, ForeignKey("noidung.id"))
     noidung = relationship(
-        "Noidung",
+        "NoiDung",
         back_populates="question",
         cascade="all, delete")
     order = Column(Integer, default=0)

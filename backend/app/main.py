@@ -2,7 +2,6 @@ import time
 from urllib.request import Request
 from fastapi import FastAPI
 from config.database import engine
-from config.database import Base
 from auth import authrouter
 from users import usersrouter
 from chuong import chuongrouter
@@ -12,6 +11,7 @@ from noidung import noidungrouter
 from keyphrase import keyphraserouter
 from keyphrasenoidung import keyphrasenoidungrouter
 from question import questionrouter
+from models import initialize_sql
 
 
 from fastapi.middleware.cors import CORSMiddleware
@@ -28,8 +28,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-Base.metadata.create_all(bind=engine)
+initialize_sql(engine)
 
 
 @app.get("/")
