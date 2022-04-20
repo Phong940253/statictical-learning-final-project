@@ -22,8 +22,16 @@ import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
 import Tables from "views/examples/Tables.js";
 import Icons from "views/examples/Icons.js";
+import Testing from "views/Testing.js";
 
 var routes = [
+  {
+    path: "/testing",
+    name: "Testing",
+    icon: "ni ni-tv-2 text-primary",
+    component: Testing,
+    layout: "/admin",
+  },
   {
     path: "/index",
     name: "Dashboard",
