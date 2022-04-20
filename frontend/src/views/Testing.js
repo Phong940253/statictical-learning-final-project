@@ -73,7 +73,9 @@ const Testing = () => {
     );
     setPhanmuc(
       phanmuc.map((item) => {
-        return { ...item, checked: checked };
+        return item.id_chuong == id_chuong
+          ? { ...item, checked: checked }
+          : item;
       })
     );
   };
@@ -176,7 +178,7 @@ const Testing = () => {
                   <FormGroup>
                     <label
                       className="form-control-label"
-                      htmlFor="custom-radio"
+                      // htmlFor="custom-radio"
                     >
                       Time
                     </label>
@@ -187,14 +189,31 @@ const Testing = () => {
                       <input
                         className="custom-control-input"
                         id="customRadio5"
-                        name="custom-radio-2"
+                        name="radio-time"
                         type="radio"
                       />
                       <label
                         className="custom-control-label"
                         htmlFor="customRadio5"
                       >
-                        Unchecked
+                        45 Minutes
+                      </label>
+                    </div>
+                    <div
+                      className="custom-control custom-radio mb-3"
+                      id="custom-radio1"
+                    >
+                      <input
+                        className="custom-control-input"
+                        id="customRadio6"
+                        name="radio-time"
+                        type="radio"
+                      />
+                      <label
+                        className="custom-control-label"
+                        htmlFor="customRadio6"
+                      >
+                        60 Minutes
                       </label>
                     </div>
                   </FormGroup>
