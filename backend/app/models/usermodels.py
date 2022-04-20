@@ -14,8 +14,8 @@ class User(Base):
     email = Column(String(50))
     date_of_birth = Column(DateTime)
     password_hash = Column(String(200))
-    veryfy_at = Column(DateTime)
-    veryfy = Column(Boolean, default=False)
+    verify_at = Column(DateTime)
+    verify = Column(Boolean, default=False)
     create_at = Column(DateTime, server_default=func.now())
     update_at = Column(DateTime, onupdate=func.now())
 

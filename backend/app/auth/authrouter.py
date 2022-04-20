@@ -21,7 +21,7 @@ async def login(
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Invalid Credentials")
-    if not Hashing.verify(user.password, request.password):
+    if not Hashing.verify(user.password_hash, request.password):
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail=f"Incorrect password"
         )
@@ -32,8 +32,9 @@ async def login(
         "id": user.id,
         "name": user.name,
         "email": user.email,
-        "is_staff": user.is_staff,
-        "is_active": user.is_active,
+        "date_of_birth": user.date_of_birth,
+        "verify": user.verify,
+        "verify_at": user.verify_at,
         "jwtToken": access_token,
     }
 
