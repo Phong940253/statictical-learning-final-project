@@ -31,8 +31,36 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "redux/action/user.action";
+import Loader from "components/Loader";
+import Error from "components/Error";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const loginreducer = useSelector((state) => state.loginReducer);
+  const { loading, error } = loginreducer;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const login = (e) => {
+    e.preventDefault();
+
+    const coba_login = new FormData();
+
+    coba_login.append("username", email);
+    coba_login.append("password", password);
+
+    dispatch(loginUser(coba_login));
+  };
+
+  useEffect(() => {
+    if (localStorage.getItem("currentUser")) {
+      window.location.href = "/";
+    }
+  }, []);
+
   return (
     <>
       <Col lg="5" md="7">
@@ -82,7 +110,7 @@ const Login = () => {
             <div className="text-center text-muted mb-4">
               <small>Or sign in with credentials</small>
             </div>
-            <Form role="form">
+            <Form role="form" onSubmit={login}>
               <FormGroup className="mb-3">
                 <InputGroup className="input-group-alternative">
                   <InputGroupAddon addonType="prepend">
@@ -91,7 +119,9 @@ const Login = () => {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
+                    name="email"
                     placeholder="Email"
+                    onChange={(e) => setEmail(e.target.value)}
                     type="email"
                     autoComplete="new-email"
                   />
@@ -105,6 +135,8 @@ const Login = () => {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
+                    name="password"
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
                     type="password"
                     autoComplete="new-password"
@@ -125,7 +157,7 @@ const Login = () => {
                 </label>
               </div>
               <div className="text-center">
-                <Button className="my-4" color="primary" type="button">
+                <Button className="my-4" color="primary" type="submit">
                   Sign in
                 </Button>
               </div>

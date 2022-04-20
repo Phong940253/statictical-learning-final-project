@@ -31,8 +31,47 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { useEffect } from "react";
+
+import Loader from "components/Loader";
+import Error from "components/Error";
+import Success from "components/Success";
+
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { registerNewUser } from "redux/action/user.action";
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const registerstate = useSelector((state) => state.registerNewUserReducer);
+  const { loading, error, success } = registerstate;
+
+  const [name, setname] = useState("");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  useEffect(() => {
+    console.log(registerstate);
+  }, [registerstate]);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const user = {
+      name: name,
+      email: email,
+      password: password,
+    };
+    console.log("register");
+
+    dispatch(registerNewUser(user));
+
+    // if (password === cpassword) {
+    //   dispatch(registerNewUser(user));
+    // } else {
+    //   alert("passwords not matched");
+    // }
+  };
+
   return (
     <>
       <Col lg="6" md="8">
@@ -82,7 +121,12 @@ const Register = () => {
             <div className="text-center text-muted mb-4">
               <small>Or sign up with credentials</small>
             </div>
-            <Form role="form">
+            {loading && <Loader />}
+            {error && (
+              <Error error="Email Address is already registred"></Error>
+            )}
+            {success && <Success success="Your Registration is successfull" />}
+            <Form role="form" onSubmit={onSubmit}>
               <FormGroup>
                 <InputGroup className="input-group-alternative mb-3">
                   <InputGroupAddon addonType="prepend">
@@ -90,7 +134,12 @@ const Register = () => {
                       <i className="ni ni-hat-3" />
                     </InputGroupText>
                   </InputGroupAddon>
-                  <Input placeholder="Name" type="text" />
+                  <Input
+                    placeholder="Name"
+                    name="name"
+                    onChange={(e) => setname(e.target.value)}
+                    type="text"
+                  />
                 </InputGroup>
               </FormGroup>
               <FormGroup>
@@ -102,6 +151,8 @@ const Register = () => {
                   </InputGroupAddon>
                   <Input
                     placeholder="Email"
+                    name="email"
+                    onChange={(e) => setemail(e.target.value)}
                     type="email"
                     autoComplete="new-email"
                   />
@@ -116,6 +167,8 @@ const Register = () => {
                   </InputGroupAddon>
                   <Input
                     placeholder="Password"
+                    name="password"
+                    onChange={(e) => setpassword(e.target.value)}
                     type="password"
                     autoComplete="new-password"
                   />
@@ -150,7 +203,7 @@ const Register = () => {
                 </Col>
               </Row>
               <div className="text-center">
-                <Button className="mt-4" color="primary" type="button">
+                <Button className="mt-4" color="primary" type="submit">
                   Create account
                 </Button>
               </div>

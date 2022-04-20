@@ -14,7 +14,7 @@ export const registerUserReducer = (state = {}, action) => {
     case "USER_REGISTER_FAILED":
       return {
         ...state,
-        loading: true,
+        loading: false,
         error: "User Already Registred",
       };
 
