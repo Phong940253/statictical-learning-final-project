@@ -219,6 +219,17 @@ const Testing = () => {
                   </FormGroup>
                 </Col>
               </Row>
+              <Row>
+                <Col log="12" className="d-flex column">
+                  <Button
+                    className="align-self-end"
+                    color="primary"
+                    type="button"
+                  >
+                    Button
+                  </Button>
+                </Col>
+              </Row>
             </div>
           </Form>
         </CardBody>
