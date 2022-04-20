@@ -15,7 +15,10 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { logoutUser } from "redux/action/user.action";
+import { useDispatch } from "react-redux";
 // reactstrap components
 import {
   DropdownMenu,
@@ -30,12 +33,16 @@ import {
   InputGroup,
   Navbar,
   Nav,
+  NavItem,
   Container,
   Media,
+  NavLink,
 } from "reactstrap";
 
 const AdminNavbar = (props) => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const dispatch = useDispatch();
+  useEffect(() => {console.log(currentUser)}, [])
 
   return (
     <>
@@ -103,7 +110,7 @@ const AdminNavbar = (props) => {
                   <DropdownItem divider />
                   <DropdownItem
                     href="#pablo"
-                    onClick={(e) => e.preventDefault()}
+                    onClick={(e) => dispatch(logoutUser())}
                   >
                     <i className="ni ni-user-run" />
                     <span>Logout</span>
@@ -111,7 +118,7 @@ const AdminNavbar = (props) => {
                 </DropdownMenu>
               </UncontrolledDropdown>
             ) : (
-              <div></div>
+              <NavItem><NavLink href="/auth">Login</NavLink></NavItem>
             )}
           </Nav>
         </Container>
