@@ -1,4 +1,5 @@
 from email.policy import default
+from enum import unique
 from xmlrpc.client import DateTime
 from sqlalchemy import Column, Integer, BigInteger, String, Boolean, DateTime
 from sqlalchemy.orm import relationship
@@ -11,7 +12,7 @@ class User(Base):
 
     id = Column(BigInteger, primary_key=True, index=True)
     name = Column(String(50))
-    email = Column(String(50))
+    email = Column(String(50), unique=True)
     date_of_birth = Column(DateTime)
     password_hash = Column(String(200))
     verify_at = Column(DateTime)
