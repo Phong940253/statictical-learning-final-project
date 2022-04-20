@@ -3,14 +3,13 @@ from config.database import get_db
 
 from models.chuongmodels import Chuong
 from sqlalchemy.orm import Session
-from dto.userschema import RegisterUser
-from config.hashing import Hashing
+from models.phanmucmodels import PhanMuc
 
 
 class ChuongService:
-    pass
-    # def get_allUser(db: Session):
-    #     return db.query(Chuong).all()
+
+    def get_allChuong(db: Session):
+        return db.query(Chuong.id, Chuong.name).all()
 
     # def get_user(email: str, db: Session = Depends(get_db)):
     #     return db.query(Chuong).filter(Chuong.email == email).first()

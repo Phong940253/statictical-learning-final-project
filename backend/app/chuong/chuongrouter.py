@@ -4,15 +4,21 @@ from config.database import get_db
 from models.usermodels import User
 from dto.userschema import RegisterUser
 from .chuongservice import ChuongService
+from phanmuc.phanmucservice import PhanMucService
 from config.token import get_currentUser
 
 router = APIRouter(prefix="/chuong", tags=["Chuong"])
 
 
-# @router.get("/")
-# def getAllUser(db: Session = Depends(get_db)):
-#     return UserService.get_allUser(db=db)
+@router.get("/")
+def getAllChuong(db: Session = Depends(get_db)):
+    return ChuongService.get_allChuong(db=db)
 
+
+@router.get("/phanmuc")
+def getAllChuongPhanMuc(db: Session = Depends(get_db)):
+    return {"chuong": ChuongService.get_allChuong(db=db),
+            "phanmuc": PhanMucService.get_allPhanMuc(db=db)}
 
 # @router.post("/")
 # def createUser(user: RegisterUser, db: Session = Depends(get_db)):

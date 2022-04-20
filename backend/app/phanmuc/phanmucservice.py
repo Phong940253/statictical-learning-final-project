@@ -8,9 +8,9 @@ from config.hashing import Hashing
 
 
 class PhanMucService:
-    pass
-    # def get_allUser(db: Session):
-    #     return db.query(Chuong).all()
+
+    def get_allPhanMuc(db: Session):
+        return db.query(PhanMuc.id, PhanMuc.name, PhanMuc.id_chuong).all()
 
     # def get_user(email: str, db: Session = Depends(get_db)):
     #     return db.query(Chuong).filter(Chuong.email == email).first()

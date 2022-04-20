@@ -9,9 +9,9 @@ from config.token import get_currentUser
 router = APIRouter(prefix="/phanmuc", tags=["PhanMuc"])
 
 
-# @router.get("/")
-# def getAllUser(db: Session = Depends(get_db)):
-#     return UserService.get_allUser(db=db)
+@router.get("/")
+def getAllPhanMuc(db: Session = Depends(get_db)):
+    return PhanMucService.get_allPhanMuc(db=db)
 
 
 # @router.post("/")
