@@ -3,16 +3,22 @@ from sqlalchemy.orm import Session
 from config.database import get_db
 from models.usermodels import User
 from dto.userschema import RegisterUser
-from .phanmucservice import PhanMucService
+from .chapterservice import ChapterService
+from section.sectionservice import SectionService
 from config.token import get_currentUser
 
-router = APIRouter(prefix="/phanmuc", tags=["PhanMuc"])
+router = APIRouter(prefix="/chapter", tags=["Chapter"])
 
 
 @router.get("/")
-def getAllPhanMuc(db: Session = Depends(get_db)):
-    return PhanMucService.get_allPhanMuc(db=db)
+def getAllChapter(db: Session = Depends(get_db)):
+    return ChapterService.get_allChapter(db=db)
 
+
+@router.get("/section")
+def getAllChapterSection(db: Session = Depends(get_db)):
+    return {"chapter": ChapterService.get_allChapter(db=db),
+            "section": SectionService.get_allSection(db=db)}
 
 # @router.post("/")
 # def createUser(user: RegisterUser, db: Session = Depends(get_db)):

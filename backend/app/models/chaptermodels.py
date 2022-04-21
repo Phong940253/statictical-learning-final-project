@@ -7,18 +7,17 @@ from sqlalchemy.sql import func
 from config.database import Base
 
 
-class PhanMuc(Base):
-    __tablename__ = "phanmuc"
+class Chapter(Base):
+    __tablename__ = "chapter"
 
     id = Column(BigInteger, primary_key=True, index=True)
     name = Column(String(200))
     order = Column(Integer, default=0)
-    id_chuong = Column(BigInteger, ForeignKey("chuong.id"))
-    chuong = relationship(
-        "Chuong",
-        back_populates="phanmuc",
-        cascade="all, delete")
+
     create_at = Column(DateTime, server_default=func.now())
     update_at = Column(DateTime, onupdate=func.now())
 
-    noidung = relationship("NoiDung", back_populates="phanmuc")
+    section = relationship(
+        "Section",
+        back_populates="chapter",
+        cascade="all, delete")

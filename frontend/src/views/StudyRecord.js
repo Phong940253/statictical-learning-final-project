@@ -36,21 +36,21 @@ import { useEffect, useState, Fragment } from "react";
 import axios from "axios";
 
 const StudyRecord = () => {
-  const [chuong, setChuong] = useState([]);
-  const [phanmuc, setPhanmuc] = useState([]);
+  const [chapter, setChapter] = useState([]);
+  const [section, setPhanmuc] = useState([]);
 
   const handleSelectAll = (e) => {
     const { id, checked } = e.target;
-    const id_chuong = id.split("customCheck")[1];
+    const id_chapter = id.split("customCheck")[1];
 
-    setChuong(
-      chuong.map((item) =>
-        item.id == id_chuong ? { ...item, checked: checked } : item
+    setChapter(
+      chapter.map((item) =>
+        item.id == id_chapter ? { ...item, checked: checked } : item
       )
     );
     setPhanmuc(
-      phanmuc.map((item) => {
-        return item.id_chuong == id_chuong
+      section.map((item) => {
+        return item.id_chapter == id_chapter
           ? { ...item, checked: checked }
           : item;
       })
@@ -61,10 +61,10 @@ const StudyRecord = () => {
 
   const handleChange = (e) => {
     const { id, checked } = e.target;
-    const id_phanmuc = id.split("PhanMuc")[1];
+    const id_section = id.split("Section")[1];
     setPhanmuc(
-      phanmuc.map((item) =>
-        item.id == id_phanmuc ? { ...item, checked: checked } : item
+      section.map((item) =>
+        item.id == id_section ? { ...item, checked: checked } : item
       )
     );
   };

@@ -1,26 +1,27 @@
 from fastapi import Depends
 from config.database import get_db
 
-from models.chuongmodels import Chuong
+from models.sectionmodels import Section
 from sqlalchemy.orm import Session
-from models.phanmucmodels import PhanMuc
+from dto.userschema import RegisterUser
+from config.hashing import Hashing
 
 
-class ChuongService:
+class SectionService:
 
-    def get_allChuong(db: Session):
-        return db.query(Chuong.id, Chuong.name).all()
+    def get_allSection(db: Session):
+        return db.query(Section.id, Section.name, Section.id_chapter).all()
 
     # def get_user(email: str, db: Session = Depends(get_db)):
-    #     return db.query(Chuong).filter(Chuong.email == email).first()
+    #     return db.query(Chapter).filter(Chapter.email == email).first()
 
     # def create_user(user: RegisterUser, db: Session = Depends(get_db)):
-    #     db_user = Chuong(
-    #         name=Chuong.name,
-    #         email=Chuong.email,
-    #         password=Hashing.bcrypt(Chuong.password),
-    #         is_staff=Chuong.is_staff,
-    #         is_active=Chuong.is_active,
+    #     db_user = Chapter(
+    #         name=Chapter.name,
+    #         email=Chapter.email,
+    #         password=Hashing.bcrypt(Chapter.password),
+    #         is_staff=Chapter.is_staff,
+    #         is_active=Chapter.is_active,
     #     )
 
     #     db.add(db_user)

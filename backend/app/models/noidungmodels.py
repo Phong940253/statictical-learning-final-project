@@ -11,15 +11,10 @@ class NoiDung(Base):
     __tablename__ = "noidung"
 
     id = Column(BigInteger, primary_key=True, index=True)
-    id_chuong = Column(BigInteger, ForeignKey("chuong.id"))
-    chuong = relationship(
-        "Chuong",
-        back_populates="noidung",
-        cascade="all, delete")
 
-    id_phanmuc = Column(BigInteger, ForeignKey("phanmuc.id"))
-    phanmuc = relationship(
-        "PhanMuc",
+    id_section = Column(BigInteger, ForeignKey("section.id"))
+    section = relationship(
+        "Section",
         back_populates="noidung",
         cascade="all, delete")
 
@@ -45,11 +40,5 @@ class NoiDung(Base):
         cascade="all, delete")
 
     type = Column(String(200))
-    correct_answer = Column(String(200))
     create_at = Column(DateTime, server_default=func.now())
     update_at = Column(DateTime, onupdate=func.now())
-
-    question = relationship(
-        "Question",
-        back_populates="noidung",
-        cascade="all, delete")

@@ -1,16 +1,13 @@
 from fastapi import Depends
 from config.database import get_db
 
-from models.testmodels import Test
+from models.questioncontentmodels import QuestionContent
 from sqlalchemy.orm import Session
-from dto.userschema import RegisterUser
-from config.hashing import Hashing
 
 
-class TestService:
-    pass
-    # def get_allUser(db: Session):
-    #     return db.query(Chapter).all()
+class QuestionContentService:
+    def get_allQuestionContent(db: Session):
+        return db.query(QuestionContent).all()
 
     # def get_user(email: str, db: Session = Depends(get_db)):
     #     return db.query(Chapter).filter(Chapter.email == email).first()

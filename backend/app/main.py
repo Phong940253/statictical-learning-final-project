@@ -4,9 +4,10 @@ from fastapi import FastAPI
 from config.database import engine
 from auth import authrouter
 from users import usersrouter
-from chuong import chuongrouter
+from chapter import chapterrouter
 from tests import testrouter
-from phanmuc import phanmucrouter
+from section import sectionrouter
+from questioncontent import questioncontentrouter
 from noidung import noidungrouter
 from keyphrase import keyphraserouter
 from manager import managerrouter
@@ -41,9 +42,10 @@ app.include_router(authrouter.router)
 app.include_router(usersrouter.router)
 app.include_router(testrouter.router)
 app.include_router(questionrouter.router)
+app.include_router(questioncontentrouter.router)
 app.include_router(noidungrouter.router)
-app.include_router(chuongrouter.router)
-app.include_router(phanmucrouter.router)
+app.include_router(chapterrouter.router)
+app.include_router(sectionrouter.router)
 app.include_router(keyphraserouter.router)
 app.include_router(keyphrasenoidungrouter.router)
 app.include_router(managerrouter.router)

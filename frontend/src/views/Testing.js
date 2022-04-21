@@ -35,45 +35,45 @@ import { useEffect, useState, Fragment } from "react";
 import axios from "axios";
 
 const Testing = () => {
-  const [chuong, setChuong] = useState([]);
-  const [phanmuc, setPhanmuc] = useState([]);
+  const [chapter, setChapter] = useState([]);
+  const [section, setPhanmuc] = useState([]);
 
   useEffect(() => {
     axios
-      .get("/chuong/phanmuc")
+      .get("/chapter/section")
       .then((res) => {
         if (res.data) {
           console.log(res.data);
-          res.data.chuong = res.data.chuong.map((item) => {
+          res.data.chapter = res.data.chapter.map((item) => {
             return { ...item, checked: false };
           });
-          setChuong(res.data.chuong);
+          setChapter(res.data.chapter);
 
-          res.data.phanmuc = res.data.phanmuc.map((item) => {
+          res.data.section = res.data.section.map((item) => {
             return { ...item, checked: false };
           });
-          // res.data.phanmuc.map((item) => { ...item, "checked": false});
-          setPhanmuc(res.data.phanmuc);
+          // res.data.section.map((item) => { ...item, "checked": false});
+          setPhanmuc(res.data.section);
         }
       })
       .catch((err) => {});
   }, []);
   // useEffect(() => {
-  //   console.log(phanmuc);
-  // }, [phanmuc]);
+  //   console.log(section);
+  // }, [section]);
 
   const handleSelectAll = (e) => {
     const { id, checked } = e.target;
-    const id_chuong = id.split("customCheck")[1];
+    const id_chapter = id.split("customCheck")[1];
 
-    setChuong(
-      chuong.map((item) =>
-        item.id == id_chuong ? { ...item, checked: checked } : item
+    setChapter(
+      chapter.map((item) =>
+        item.id == id_chapter ? { ...item, checked: checked } : item
       )
     );
     setPhanmuc(
-      phanmuc.map((item) => {
-        return item.id_chuong == id_chuong
+      section.map((item) => {
+        return item.id_chapter == id_chapter
           ? { ...item, checked: checked }
           : item;
       })
@@ -84,15 +84,15 @@ const Testing = () => {
 
   const handleChange = (e) => {
     const { id, checked } = e.target;
-    const id_phanmuc = id.split("PhanMuc")[1];
+    const id_section = id.split("Section")[1];
     setPhanmuc(
-      phanmuc.map((item) =>
-        item.id == id_phanmuc ? { ...item, checked: checked } : item
+      section.map((item) =>
+        item.id == id_section ? { ...item, checked: checked } : item
       )
     );
   };
 
-  const listChuong = chuong.map((item, index) => (
+  const listChapter = chapter.map((item, index) => (
     <Fragment key={index}>
       <div key={item.id} className="custom-control custom-checkbox mb-2">
         <input
@@ -109,14 +109,14 @@ const Testing = () => {
           {item.name}
         </label>
       </div>
-      {phanmuc.map((item2, index2) => (
+      {section.map((item2, index2) => (
         <Fragment key={index * 100 + index2}>
-          {item2.id_chuong === item.id && (
+          {item2.id_chapter === item.id && (
             <div className="custom-control custom-checkbox mb-2 ml-3">
               <input
                 className="custom-control-input"
                 id={
-                  "customCheckChuong" + item2.id_chuong + "PhanMuc" + item2.id
+                  "customCheckChapter" + item2.id_chapter + "Section" + item2.id
                 }
                 type="checkbox"
                 onChange={handleChange}
@@ -125,7 +125,7 @@ const Testing = () => {
               <label
                 className="custom-control-label"
                 htmlFor={
-                  "customCheckChuong" + item2.id_chuong + "PhanMuc" + item2.id
+                  "customCheckChapter" + item2.id_chapter + "Section" + item2.id
                 }
               >
                 {item2.name}
@@ -171,7 +171,7 @@ const Testing = () => {
                     >
                       Select chapter
                     </label>
-                    {listChuong}
+                    {listChapter}
                   </FormGroup>
                 </Col>
                 <Col lg="6">

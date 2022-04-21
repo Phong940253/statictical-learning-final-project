@@ -10,18 +10,18 @@ from config.hashing import Hashing
 class NoiDungService:
     pass
     # def get_allUser(db: Session):
-    #     return db.query(Chuong).all()
+    #     return db.query(Chapter).all()
 
     # def get_user(email: str, db: Session = Depends(get_db)):
-    #     return db.query(Chuong).filter(Chuong.email == email).first()
+    #     return db.query(Chapter).filter(Chapter.email == email).first()
 
     # def create_user(user: RegisterUser, db: Session = Depends(get_db)):
-    #     db_user = Chuong(
-    #         name=Chuong.name,
-    #         email=Chuong.email,
-    #         password=Hashing.bcrypt(Chuong.password),
-    #         is_staff=Chuong.is_staff,
-    #         is_active=Chuong.is_active,
+    #     db_user = Chapter(
+    #         name=Chapter.name,
+    #         email=Chapter.email,
+    #         password=Hashing.bcrypt(Chapter.password),
+    #         is_staff=Chapter.is_staff,
+    #         is_active=Chapter.is_active,
     #     )
 
     #     db.add(db_user)
