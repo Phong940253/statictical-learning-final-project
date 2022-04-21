@@ -55,6 +55,10 @@ const currentUser = localStorage.getItem("currentUser")
   ? JSON.parse(localStorage.getItem("currentUser"))
   : null;
 
+const currentTest = localStorage.getItem("currentTest")
+  ? JSON.parse(localStorage.getItem("currentTest"))
+  : { loading: false, error: false, success: false };
+
 const initialReducer = {
   cartReducer: { cartItems: cartItems },
   loginReducer: { currentUser: currentUser },

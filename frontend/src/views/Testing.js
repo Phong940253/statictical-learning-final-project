@@ -32,7 +32,7 @@ import {
 // core components
 import HeaderCustom from "components/Headers/HeaderCustom";
 import { useEffect, useState, Fragment } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { createNewTest } from "redux/action/test.action";
 
@@ -41,6 +41,8 @@ const Testing = () => {
   const [chapter, setChapter] = useState([]);
   const [section, setSection] = useState([]);
   const dispatch = useDispatch();
+  const testreducer = useSelector((state) => state.createTestReducer);
+  // const { loading, error, success } = testreducer;
 
   useEffect(() => {
     axios

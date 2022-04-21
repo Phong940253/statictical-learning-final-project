@@ -7,7 +7,7 @@ export const createNewTest = (test) => (dispatch) => {
     .post("/tests", test)
     .then((res) => {
       dispatch({ type: "TEST_REGISTER_SUCCESS" });
-      console.log(res);
+      console.log(res.data);
     })
     .catch((err) => {
       dispatch({ type: "TEST_REGISTER_FAILED", payload: err });
