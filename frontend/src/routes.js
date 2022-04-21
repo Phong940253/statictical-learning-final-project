@@ -23,6 +23,7 @@ import Login from "views/examples/Login.js";
 import Tables from "views/examples/Tables.js";
 import Icons from "views/examples/Icons.js";
 import Testing from "views/Testing.js";
+import StudyRecord from "views/StudyRecord.js";
 
 var routes = [
   {
@@ -30,6 +31,13 @@ var routes = [
     name: "Testing",
     icon: "ni ni-tv-2 text-primary",
     component: Testing,
+    layout: "/admin",
+  },
+  {
+    path: "/study-record",
+    name: "Study Record",
+    icon: "ni ni-tv-2 text-primary",
+    component: StudyRecord,
     layout: "/admin",
   },
   {
