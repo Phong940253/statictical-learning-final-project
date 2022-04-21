@@ -10,7 +10,7 @@ from models.usermodels import User
 
 class TestService:
 
-    def get_allTest(db: Session):
+    def get_all_test(db: Session):
         return db.query(Test).all()
 
     def create_test(

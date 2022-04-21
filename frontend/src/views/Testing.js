@@ -32,11 +32,17 @@ import {
 // core components
 import HeaderCustom from "components/Headers/HeaderCustom";
 import { useEffect, useState, Fragment } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { createNewTest } from "redux/action/test.action";
 
 const Testing = () => {
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const [chapter, setChapter] = useState([]);
-  const [section, setPhanmuc] = useState([]);
+  const [section, setSection] = useState([]);
+  const dispatch = useDispatch();
+  const testreducer = useSelector((state) => state.createTestReducer);
+  // const { loading, error, success } = testreducer;
 
   useEffect(() => {
     axios
@@ -53,14 +59,35 @@ const Testing = () => {
             return { ...item, checked: false };
           });
           // res.data.section.map((item) => { ...item, "checked": false});
-          setPhanmuc(res.data.section);
+          setSection(res.data.section);
         }
       })
       .catch((err) => {});
   }, []);
-  // useEffect(() => {
-  //   console.log(section);
-  // }, [section]);
+
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+
+    let list_section = [];
+    section.map((item) => {
+      if (item.checked) {
+        list_section.push(item.id);
+      }
+    });
+
+    dispatch(
+      createNewTest({
+        list_id: list_section,
+        time: e.target["radio-time"].value,
+        id_user: currentUser.id,
+      })
+    );
+    // e.target.map((item) => {
+    //   if (item.value) {
+    //     console.log(item);
+    //   }
+    // });
+  };
 
   const handleSelectAll = (e) => {
     const { id, checked } = e.target;
@@ -71,7 +98,7 @@ const Testing = () => {
         item.id == id_chapter ? { ...item, checked: checked } : item
       )
     );
-    setPhanmuc(
+    setSection(
       section.map((item) => {
         return item.id_chapter == id_chapter
           ? { ...item, checked: checked }
@@ -85,7 +112,7 @@ const Testing = () => {
   const handleChange = (e) => {
     const { id, checked } = e.target;
     const id_section = id.split("Section")[1];
-    setPhanmuc(
+    setSection(
       section.map((item) =>
         item.id == id_section ? { ...item, checked: checked } : item
       )
@@ -159,7 +186,7 @@ const Testing = () => {
           </Row>
         </CardHeader>
         <CardBody>
-          <Form>
+          <Form role="form" onSubmit={handleSubmitForm}>
             <h6 className="heading-small text-muted mb-4">Exam content</h6>
             <div className="pl-lg-4">
               <Row>
@@ -191,6 +218,7 @@ const Testing = () => {
                         id="customRadio5"
                         name="radio-time"
                         type="radio"
+                        value={45}
                       />
                       <label
                         className="custom-control-label"
@@ -208,6 +236,8 @@ const Testing = () => {
                         id="customRadio6"
                         name="radio-time"
                         type="radio"
+                        value={60}
+                        required
                       />
                       <label
                         className="custom-control-label"
@@ -224,7 +254,7 @@ const Testing = () => {
                   <Button
                     className="align-self-end"
                     color="primary"
-                    type="button"
+                    type="submit"
                   >
                     Start
                   </Button>

@@ -37,7 +37,7 @@ import axios from "axios";
 
 const StudyRecord = () => {
   const [chapter, setChapter] = useState([]);
-  const [section, setPhanmuc] = useState([]);
+  const [section, setSection] = useState([]);
 
   const handleSelectAll = (e) => {
     const { id, checked } = e.target;
@@ -48,7 +48,7 @@ const StudyRecord = () => {
         item.id == id_chapter ? { ...item, checked: checked } : item
       )
     );
-    setPhanmuc(
+    setSection(
       section.map((item) => {
         return item.id_chapter == id_chapter
           ? { ...item, checked: checked }
@@ -62,7 +62,7 @@ const StudyRecord = () => {
   const handleChange = (e) => {
     const { id, checked } = e.target;
     const id_section = id.split("Section")[1];
-    setPhanmuc(
+    setSection(
       section.map((item) =>
         item.id == id_section ? { ...item, checked: checked } : item
       )
