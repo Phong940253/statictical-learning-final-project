@@ -9,7 +9,8 @@
         ],
         "correct": "B",
         "explain": "<div class=\"mtq_explanation-text\"> fun1() prints the given Linked List in reverse manner. For Linked List 1-&gt;2-&gt;3-&gt;4-&gt;5, fun1() prints 5-&gt;4-&gt;3-&gt;2-&gt;1.   See <a href=\"http://www.geeksforgeeks.org/practice-questions-for-linked-list-and-recursion/\" target=\"_blank\">http://www.geeksforgeeks.org/practice-questions-for-linked-list-and-recursion/</a></div>",
-        "keyword": "Linked List"
+        "keyword": "Linked List",
+        "phanmuc": "Singly Linked List"
     },
     {
         "question": "Which of the following points is/are true about Linked List data structure when it is compared with array",
