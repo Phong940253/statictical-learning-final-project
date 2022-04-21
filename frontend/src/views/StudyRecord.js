@@ -75,10 +75,7 @@ const StudyRecord = () => {
       <Card className="bg-secondary shadow  m-xl-4">
         <CardHeader className="bg-white border-0">
           <Row className="align-items-center">
-            <Col xs="4">
-              <h3 className="mb-0">General chapters</h3>
-            </Col>
-            <Col className="text-left" xs="8">
+            <Col className="text-left" xs="12">
               <h4>Accumulation score</h4>
             </Col>
           </Row>
@@ -86,14 +83,7 @@ const StudyRecord = () => {
         <CardBody>
           <div className="pl-lg-4">
             <Row>
-              <Col lg="4">
-                <FormGroup>
-                  <label className="form-control-label" htmlFor="custom-radio">
-                    Select chapter
-                  </label>
-                </FormGroup>
-              </Col>
-              <Col lg="8">
+              <Col lg="12">
                 <Row>
                   <Col
                     lg="6"
@@ -376,17 +366,7 @@ const StudyRecord = () => {
                 </Row>
               </Col>
             </Row>
-            <Row>
-              <Col log="12" className="d-flex column">
-                <Button
-                  className="align-self-end"
-                  color="primary"
-                  type="button"
-                >
-                  Start
-                </Button>
-              </Col>
-            </Row>
+            <Row></Row>
           </div>
         </CardBody>
       </Card>
