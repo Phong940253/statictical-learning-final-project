@@ -32,7 +32,13 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
+  Nav,
+  NavLink,
+  NavItem,
+  TabContent,
+  TabPane,
 } from "reactstrap";
+import classnames from "classnames";
 // core components
 import HeaderCustom from "components/Headers/HeaderCustom";
 import { useEffect, useState, Fragment } from "react";
@@ -43,6 +49,13 @@ import Loader from "components/Loader";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
+const RawHTML = ({ children, className = "" }) => (
+  <div
+    className={className}
+    dangerouslySetInnerHTML={{ __html: children.replace(/\n/g, "<br />") }}
+  />
+);
+
 const Testing = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const [chapter, setChapter] = useState([]);
@@ -52,7 +65,17 @@ const Testing = () => {
   const { loading, error, success, question, test, hasquestion } = testreducer;
   const [timeRemain, setTimeRemain] = useState(0);
   const [maxTime, setMaxTime] = useState(0);
+  const [tab, setTab] = useState(1);
+  const toggleNavs = (e, state, index) => {
+    e.preventDefault();
+    setTab(index);
+  };
+
   let deadline;
+
+  useEffect(() => {
+    console.log(question);
+  }, [question]);
 
   useEffect(() => {
     if (test) {
@@ -88,6 +111,10 @@ const Testing = () => {
       .catch((err) => {});
   }, []);
 
+  const handleSubmitFormTest = (e) => {
+    e.preventDefault();
+  };
+
   const handleSubmitForm = (e) => {
     e.preventDefault();
 
@@ -105,11 +132,6 @@ const Testing = () => {
         id_user: currentUser.id,
       })
     );
-    // e.target.map((item) => {
-    //   if (item.value) {
-    //     console.log(item);
-    //   }
-    // });
   };
 
   const handleSelectAll = (e) => {
@@ -195,74 +217,93 @@ const Testing = () => {
           <Col className="order-xl-2 mb-5 mb-xl-0" xl="8">
             <Card className="card-profile shadow">
               <Row className="justify-content-center"></Row>
-              <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-                <div className="d-flex justify-content-between">
-                  <Button
-                    className="mr-4"
-                    color="info"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                    size="sm"
-                  >
-                    Connect
-                  </Button>
-                  <Button
-                    className="float-right"
-                    color="default"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                    size="sm"
-                  >
-                    Message
-                  </Button>
-                </div>
+              <CardHeader className="text-right border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                <Button
+                  className="btn-icon btn-2"
+                  color="primary"
+                  type="submit"
+                  form="form-test"
+                >
+                  Submit
+                </Button>
               </CardHeader>
+
               <CardBody className="pt-0 pt-md-4">
-                <Row>
-                  <div className="col">
-                    <div className="card-profile-stats d-flex justify-content-center mt-md-5">
-                      <div>
-                        <span className="heading">22</span>
-                        <span className="description">Friends</span>
-                      </div>
-                      <div>
-                        <span className="heading">10</span>
-                        <span className="description">Photos</span>
-                      </div>
-                      <div>
-                        <span className="heading">89</span>
-                        <span className="description">Comments</span>
-                      </div>
-                    </div>
-                  </div>
-                </Row>
-                <div className="text-center">
-                  <h3>
-                    Jessica Jones
-                    <span className="font-weight-light">, 27</span>
-                  </h3>
-                  <div className="h5 font-weight-300">
-                    <i className="ni location_pin mr-2" />
-                    Bucharest, Romania
-                  </div>
-                  <div className="h5 mt-4">
-                    <i className="ni business_briefcase-24 mr-2" />
-                    Solution Manager - Creative Tim Officer
-                  </div>
-                  <div>
-                    <i className="ni education_hat mr-2" />
-                    University of Computer Science
-                  </div>
-                  <hr className="my-4" />
-                  <p>
-                    Ryan — the name taken by Melbourne-raised, Brooklyn-based
-                    Nick Murphy — writes, performs and records all of his own
-                    music.
-                  </p>
-                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                    Show more
-                  </a>
-                </div>
+                <Form id="form-test" onSubmit={handleSubmitFormTest}>
+                  <TabContent activeTab={"tabs" + tab}>
+                    {question.map((item, index) => (
+                      <TabPane tabId={"tabs" + (index + 1)} key={index}>
+                        Question {index + 1}/{question.length}
+                        <RawHTML className="description">
+                          {item.content}
+                        </RawHTML>
+                        <p className="description">
+                          Which of the following answers is correct?
+                        </p>
+                        <div className="custom-control custom-radio mb-3">
+                          <input
+                            className="custom-control-input"
+                            id={"customRadioA" + index}
+                            name={"question-radio-" + item.Question.id}
+                            type="radio"
+                            value="A"
+                          />
+                          <label
+                            className="custom-control-label"
+                            htmlFor={"customRadioA" + index}
+                          >
+                            A. {item.answer_a}
+                          </label>
+                        </div>
+                        <div className="custom-control custom-radio mb-3">
+                          <input
+                            className="custom-control-input"
+                            id={"customRadioB" + index}
+                            name={"question-radio-" + item.Question.id}
+                            type="radio"
+                            value="B"
+                          />
+                          <label
+                            className="custom-control-label"
+                            htmlFor={"customRadioB" + index}
+                          >
+                            B. {item.answer_b}
+                          </label>
+                        </div>
+                        <div className="custom-control custom-radio mb-3">
+                          <input
+                            className="custom-control-input"
+                            id={"customRadioC" + index}
+                            name={"question-radio-" + item.Question.id}
+                            type="radio"
+                            value="C"
+                          />
+                          <label
+                            className="custom-control-label"
+                            htmlFor={"customRadioC" + index}
+                          >
+                            C. {item.answer_c}
+                          </label>
+                        </div>
+                        <div className="custom-control custom-radio mb-3">
+                          <input
+                            className="custom-control-input"
+                            id={"customRadioD" + index}
+                            name={"question-radio-" + item.Question.id}
+                            type="radio"
+                            value="D"
+                          />
+                          <label
+                            className="custom-control-label"
+                            htmlFor={"customRadioD" + index}
+                          >
+                            D. {item.answer_d}
+                          </label>
+                        </div>
+                      </TabPane>
+                    ))}
+                  </TabContent>
+                </Form>
               </CardBody>
             </Card>
           </Col>
@@ -276,7 +317,7 @@ const Testing = () => {
                 </Row>
               </CardHeader>
               <CardBody>
-                <h6 className="heading-small text-muted mb-4">Time Remain</h6>
+                <h6 className="heading-small text-muted mb-4">Duration</h6>
                 <div className="pl-lg-4">
                   <Row>
                     <Col
@@ -301,98 +342,39 @@ const Testing = () => {
                 </div>
                 <hr className="my-4" />
                 {/* Address */}
-                <h6 className="heading-small text-muted mb-4">
-                  Contact information
-                </h6>
+                <h6 className="heading-small text-muted mb-4">Questions</h6>
                 <div className="pl-lg-4">
                   <Row>
                     <Col md="12">
-                      <FormGroup>
-                        <label
-                          className="form-control-label"
-                          htmlFor="input-address"
-                        >
-                          Address
-                        </label>
-                        <Input
-                          className="form-control-alternative"
-                          defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                          id="input-address"
-                          placeholder="Home Address"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col lg="4">
-                      <FormGroup>
-                        <label
-                          className="form-control-label"
-                          htmlFor="input-city"
-                        >
-                          City
-                        </label>
-                        <Input
-                          className="form-control-alternative"
-                          defaultValue="New York"
-                          id="input-city"
-                          placeholder="City"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col lg="4">
-                      <FormGroup>
-                        <label
-                          className="form-control-label"
-                          htmlFor="input-country"
-                        >
-                          Country
-                        </label>
-                        <Input
-                          className="form-control-alternative"
-                          defaultValue="United States"
-                          id="input-country"
-                          placeholder="Country"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col lg="4">
-                      <FormGroup>
-                        <label
-                          className="form-control-label"
-                          htmlFor="input-country"
-                        >
-                          Postal code
-                        </label>
-                        <Input
-                          className="form-control-alternative"
-                          id="input-postal-code"
-                          placeholder="Postal code"
-                          type="number"
-                        />
-                      </FormGroup>
+                      <Nav
+                        className="nav-pills-circle flex-column flex-md-row"
+                        id="tabs-icons-text"
+                        pills
+                        role="tablist"
+                      >
+                        {question.map((item, index) => (
+                          <NavItem key={index}>
+                            <NavLink
+                              aria-selected={tab === index + 1}
+                              className={classnames("mb-sm-3 mb-md-0", {
+                                active: tab === index + 1,
+                              })}
+                              onClick={(e) => toggleNavs(e, "tabs", index + 1)}
+                              href="#pablo"
+                              role="tab"
+                            >
+                              <span className="nav-link-icon d-block">
+                                {index + 1}
+                              </span>
+                            </NavLink>
+                          </NavItem>
+                        ))}
+                      </Nav>
                     </Col>
                   </Row>
                 </div>
                 <hr className="my-4" />
                 {/* Description */}
-                <h6 className="heading-small text-muted mb-4">About me</h6>
-                <div className="pl-lg-4">
-                  <FormGroup>
-                    <label>About Me</label>
-                    <Input
-                      className="form-control-alternative"
-                      placeholder="A few words about you ..."
-                      rows="4"
-                      defaultValue="A beautiful Dashboard for Bootstrap 4. It is Free and
-                        Open Source."
-                      type="textarea"
-                    />
-                  </FormGroup>
-                </div>
               </CardBody>
             </Card>
           </Col>
