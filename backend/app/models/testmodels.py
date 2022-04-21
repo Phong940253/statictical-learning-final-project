@@ -1,6 +1,7 @@
 from email.policy import default
+from time import time
 from xmlrpc.client import DateTime
-from sqlalchemy import Column, BigInteger, SmallInteger, ForeignKey, DateTime
+from sqlalchemy import Column, BigInteger, Integer, SmallInteger, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from config.database import Base
@@ -16,6 +17,8 @@ class Test(Base):
 
     create_at = Column(DateTime, server_default=func.now())
     update_at = Column(DateTime, onupdate=func.now())
+
+    time = Column(Integer, default=45)
 
     question = relationship(
         "Question",

@@ -8,9 +8,9 @@ from config.hashing import Hashing
 
 
 class QuestionService:
-    pass
-    # def get_allUser(db: Session):
-    #     return db.query(Chuong).all()
+
+    def get_allQuestion(db: Session):
+        return db.query(Question).all()
 
     # def get_user(email: str, db: Session = Depends(get_db)):
     #     return db.query(Chuong).filter(Chuong.email == email).first()

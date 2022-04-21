@@ -9,6 +9,7 @@ from tests import testrouter
 from phanmuc import phanmucrouter
 from noidung import noidungrouter
 from keyphrase import keyphraserouter
+from manager import managerrouter
 from keyphrasenoidung import keyphrasenoidungrouter
 from question import questionrouter
 from models import initialize_sql
@@ -45,3 +46,4 @@ app.include_router(chuongrouter.router)
 app.include_router(phanmucrouter.router)
 app.include_router(keyphraserouter.router)
 app.include_router(keyphrasenoidungrouter.router)
+app.include_router(managerrouter.router)

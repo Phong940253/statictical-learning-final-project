@@ -1,15 +1,21 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from config.database import get_db
-from .questionservice import QuestionService
+from models.usermodels import User
+from dto.userschema import RegisterUser
+from .managerservice import ManagerService
 from config.token import get_currentUser
 
-router = APIRouter(prefix="/question", tags=["Question"])
+router = APIRouter(prefix="/manager", tags=["Manager"])
 
 
-@router.get("/")
-def getAllUser(db: Session = Depends(get_db)):
-    return QuestionService.get_allQuestion(db=db)
+@router.get("/seed")
+def seed(db: Session = Depends(get_db)):
+    return ManagerService.seed(db=db)
+
+# @router.get("/")
+# def getAllUser(db: Session = Depends(get_db)):
+#     return UserService.get_allUser(db=db)
 
 
 # @router.post("/")
