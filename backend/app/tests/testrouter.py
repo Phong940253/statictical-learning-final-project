@@ -9,24 +9,22 @@ from sqlalchemy import select
 from sqlalchemy.sql import func
 from models.noidungmodels import NoiDung
 from models.sectionmodels import Section
-from models.usermodels import User
-from config.token import get_currentUser
+from typing import List
 
-router = APIRouter(prefix="/test", tags=["Test"])
+router = APIRouter(prefix="/tests", tags=["Tests"])
 
 
 @router.get("/")
 def get_all_test(db: Session = Depends(get_db)):
-    return TestService.get_all(db=db)
+    return TestService.get_all_test(db=db)
 
 
 @router.post("/")
 def create_test(
         section: SectionId,
-        id_user: int,
         db: Session = Depends(get_db)):
     db_test = TestService.create_test(
-        db=db, id_user=id_user, time=section.time)
+        db=db, id_user=section.id_user, time=section.time)
 
     db_question_content = db.execute(
         select(QuestionContent).join(Section).where(

@@ -6,3 +6,4 @@ from typing import List
 class SectionId(BaseModel):
     list_id: List[int]
     time: int
+    id_user: int
