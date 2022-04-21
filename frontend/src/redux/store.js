@@ -22,9 +22,9 @@ import {
   getOrdersByUserIdReducer,
   placeOrderReducer,
 } from "./reducers/order.reducer";
-import {
-  getAllAspectReviewsReducer,
-} from "./reducers/review.reducer";
+import { getAllAspectReviewsReducer } from "./reducers/review.reducer";
+
+import { createTestReducer } from "./reducers/test.reducer";
 
 const finalReducer = combineReducers({
   getAllProductsReducer: getAllProductReducer,
@@ -43,7 +43,8 @@ const finalReducer = combineReducers({
   addProductReducer: addProductReducer,
   updateProductReducer: updateProductReducer,
   deleteProductReducer: deleteProductReducer,
-  getAllAspectReviewsReducer: getAllAspectReviewsReducer
+  getAllAspectReviewsReducer: getAllAspectReviewsReducer,
+  createTestReducer: createTestReducer,
 });
 
 const cartItems = localStorage.getItem("cartItems")
