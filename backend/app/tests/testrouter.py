@@ -38,7 +38,15 @@ def create_test(
     db.add_all(list_question)
     db.commit()
 
-    [db.refresh(question) for question in list_question]
+    return db.query(
+        Question,
+        QuestionContent.content,
+        QuestionContent.answer_a,
+        QuestionContent.answer_b,
+        QuestionContent.answer_c,
+        QuestionContent.answer_d).join(Section).join(Question).filter(
+        Question.id_test == db_test.id).all()
+    # [db.refresh(question) for question in list_question]
     return list_question
 
 
