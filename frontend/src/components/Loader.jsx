@@ -1,6 +1,6 @@
 export default function Loader() {
   return (
-    <div className="d-flex flex-column">
+    <div className="d-flex flex-column justify-content-center">
       <div
         className="spinner-border align-self-center"
         role="status"

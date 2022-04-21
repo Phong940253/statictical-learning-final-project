@@ -28,6 +28,10 @@ import {
   Container,
   Row,
   Col,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from "reactstrap";
 // core components
 import HeaderCustom from "components/Headers/HeaderCustom";
@@ -35,6 +39,7 @@ import { useEffect, useState, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { createNewTest } from "redux/action/test.action";
+import Loader from "components/Loader";
 
 const Testing = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -42,7 +47,7 @@ const Testing = () => {
   const [section, setSection] = useState([]);
   const dispatch = useDispatch();
   const testreducer = useSelector((state) => state.createTestReducer);
-  // const { loading, error, success } = testreducer;
+  const { loading, error, success, question } = testreducer;
 
   useEffect(() => {
     axios
@@ -262,6 +267,19 @@ const Testing = () => {
               </Row>
             </div>
           </Form>
+          <Modal
+            fade={false}
+            centered
+            isOpen={loading}
+            toggle={function noRefCheck() {}}
+          >
+            <ModalBody
+              className="d-flex justify-content-center align-content-center"
+              style={{ height: "300px" }}
+            >
+              <Loader />
+            </ModalBody>
+          </Modal>
         </CardBody>
       </Card>
     </>
