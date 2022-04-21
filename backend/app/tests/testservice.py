@@ -15,9 +15,9 @@ class TestService:
 
     def create_test(
             db: Session,
-            time: int = 45,
-            current_user: User = Depends(get_currentUser)):
-        db_test = Test(time=time, id_user=current_user.id)
+            id_user,
+            time: int = 45):
+        db_test = Test(time=time, id_user=id_user)
         db.add(db_test)
         db.commit()
 

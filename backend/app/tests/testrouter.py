@@ -23,10 +23,10 @@ def get_all_test(db: Session = Depends(get_db)):
 @router.post("/")
 def create_test(
         section: SectionId,
-        db: Session = Depends(get_db),
-        current_user: User = Depends(get_currentUser)):
+        id_user: int,
+        db: Session = Depends(get_db)):
     db_test = TestService.create_test(
-        db=db, current_user=current_user, time=section.time)
+        db=db, id_user=id_user, time=section.time)
 
     db_question_content = db.execute(
         select(QuestionContent).join(Section).where(

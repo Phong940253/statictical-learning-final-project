@@ -47,6 +47,7 @@ def verify_token(
 def get_currentUser(
         db: Session = Depends(get_db),
         data: str = Depends(oauth2_scheme)):
+    print(data)
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
