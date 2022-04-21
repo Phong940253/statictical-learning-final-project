@@ -40,6 +40,8 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { createNewTest } from "redux/action/test.action";
 import Loader from "components/Loader";
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 const Testing = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -47,7 +49,23 @@ const Testing = () => {
   const [section, setSection] = useState([]);
   const dispatch = useDispatch();
   const testreducer = useSelector((state) => state.createTestReducer);
-  const { loading, error, success, question, hasquestion } = testreducer;
+  const { loading, error, success, question, test, hasquestion } = testreducer;
+  const [timeRemain, setTimeRemain] = useState(0);
+  const [maxTime, setMaxTime] = useState(0);
+  let deadline;
+
+  useEffect(() => {
+    if (test) {
+      setMaxTime(test.time * 60);
+      setTimeRemain(test.time * 60);
+      deadline = new Date(Date.parse(new Date()) + (test.time * 60 + 1) * 1000);
+      console.log(deadline);
+
+      const interval = setInterval(() => {
+        setTimeRemain((deadline - new Date()) / 1000);
+      }, 1000);
+    }
+  }, [test]);
 
   useEffect(() => {
     axios
@@ -258,11 +276,23 @@ const Testing = () => {
                 </Row>
               </CardHeader>
               <CardBody>
-                <h6 className="heading-small text-muted mb-4">Time</h6>
+                <h6 className="heading-small text-muted mb-4">Time Remain</h6>
                 <div className="pl-lg-4">
                   <Row>
-                    <Col lg="6"></Col>
-                    <Col lg="6"></Col>
+                    <Col
+                      lg="12"
+                      className="d-flex justify-content-center align-content-center"
+                    >
+                      <div style={{ width: 150, height: 150 }}>
+                        <CircularProgressbar
+                          value={timeRemain}
+                          maxValue={maxTime}
+                          text={new Date(timeRemain * 1000)
+                            .toISOString()
+                            .substr(11, 8)}
+                        />
+                      </div>
+                    </Col>
                   </Row>
                   <Row>
                     <Col lg="6"></Col>

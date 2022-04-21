@@ -10,7 +10,8 @@ export const createTestReducer = (state = {}, action) => {
         ...state,
         loading: false,
         success: true,
-        question: action.question,
+        question: action.question.question,
+        test: action.question.test,
         hasquestion: true,
       };
     case "TEST_REGISTER_FAILED":
