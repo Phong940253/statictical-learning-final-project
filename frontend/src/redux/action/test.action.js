@@ -6,8 +6,8 @@ export const createNewTest = (test) => (dispatch) => {
   axios
     .post("/tests", test)
     .then((res) => {
-      dispatch({ type: "TEST_REGISTER_SUCCESS" });
-      console.log(res.data);
+      dispatch({ type: "TEST_REGISTER_SUCCESS", question: res.data });
+      // console.log(res.data);
     })
     .catch((err) => {
       dispatch({ type: "TEST_REGISTER_FAILED", payload: err });
