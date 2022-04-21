@@ -226,7 +226,7 @@ const Testing = () => {
                     color="primary"
                     type="button"
                   >
-                    Button
+                    Start
                   </Button>
                 </Col>
               </Row>
