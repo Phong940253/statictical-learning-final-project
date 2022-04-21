@@ -16,7 +16,7 @@ class Question(Base):
         "Test",
         back_populates="question",
         cascade="all, delete")
-    id_questioncontent = Column(BigInteger, ForeignKey("questioncontent.id"))
+    id_question_content = Column(BigInteger, ForeignKey("questioncontent.id"))
     order = Column(Integer, default=0)
     create_at = Column(DateTime, server_default=func.now())
     update_at = Column(DateTime, onupdate=func.now())

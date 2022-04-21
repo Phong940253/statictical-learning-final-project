@@ -12,6 +12,14 @@ class QuestionService:
     def get_allQuestion(db: Session):
         return db.query(Question).all()
 
+    def create_question(db: Session, id_section_content: int):
+        db_question = Question(id_noi_dung=id_section_content)
+        db.add(db_question)
+        db.commit()
+
+        db.refresh(db_question)
+        return db_question
+
     # def get_user(email: str, db: Session = Depends(get_db)):
     #     return db.query(Chapter).filter(Chapter.email == email).first()
 

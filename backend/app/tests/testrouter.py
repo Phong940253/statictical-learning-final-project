@@ -1,22 +1,47 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
+from models.questioncontentmodels import QuestionContent
+from models.questionmodels import Question
 from config.database import get_db
-from models.usermodels import User
-from dto.userschema import RegisterUser
+from dto.sectionschema import SectionId
 from .testservice import TestService
+from sqlalchemy import select
+from sqlalchemy.sql import func
+from models.noidungmodels import NoiDung
+from models.sectionmodels import Section
+from models.usermodels import User
 from config.token import get_currentUser
 
 router = APIRouter(prefix="/test", tags=["Test"])
 
 
-# @router.get("/")
-# def getAllUser(db: Session = Depends(get_db)):
-#     return UserService.get_allUser(db=db)
+@router.get("/")
+def get_all_test(db: Session = Depends(get_db)):
+    return TestService.get_all(db=db)
 
 
-# @router.post("/")
-# def createUser(user: RegisterUser, db: Session = Depends(get_db)):
-#     return UserService.create_user(user, db)
+@router.post("/")
+def create_test(
+        section: SectionId,
+        db: Session = Depends(get_db),
+        current_user: User = Depends(get_currentUser)):
+    db_test = TestService.create_test(
+        db=db, current_user=current_user, time=section.time)
+
+    db_question_content = db.execute(
+        select(QuestionContent).join(Section).where(
+            Section.id.in_(
+                section.list_id)).order_by(
+            func.rand()).limit(20)).all()
+    list_question = [
+        Question(
+            id_test=db_test.id,
+            id_question_content=question_content["QuestionContent"].id) for question_content in db_question_content]
+    db.add_all(list_question)
+    db.commit()
+
+    [db.refresh(question) for question in list_question]
+    return list_question
 
 
 # @router.get("/me")

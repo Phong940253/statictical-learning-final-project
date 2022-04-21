@@ -22,7 +22,10 @@ def create_access_token(data: dict):
     return encoded_jwt
 
 
-def verify_token(token: str, credentials_exception, db: Session = Depends(get_db)):
+def verify_token(
+        token: str,
+        credentials_exception,
+        db: Session = Depends(get_db)):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=ALGORITHM)
         email: str = payload.get("sub")
@@ -41,12 +44,15 @@ def verify_token(token: str, credentials_exception, db: Session = Depends(get_db
     return user
 
 
-def get_currentUser(db: Session = Depends(get_db), data: str = Depends(oauth2_scheme)):
+def get_currentUser(
+        db: Session = Depends(get_db),
+        data: str = Depends(oauth2_scheme)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
         headers={"WWW-Authenticate": "Bearer"},
     )
-
-    return verify_token(token=data, credentials_exception=credentials_exception, db=db)
-
+    return verify_token(
+        token=data,
+        credentials_exception=credentials_exception,
+        db=db)

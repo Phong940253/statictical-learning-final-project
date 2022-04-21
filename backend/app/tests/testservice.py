@@ -3,14 +3,26 @@ from config.database import get_db
 
 from models.testmodels import Test
 from sqlalchemy.orm import Session
-from dto.userschema import RegisterUser
 from config.hashing import Hashing
+from config.token import get_currentUser
+from models.usermodels import User
 
 
 class TestService:
-    pass
-    # def get_allUser(db: Session):
-    #     return db.query(Chapter).all()
+
+    def get_allTest(db: Session):
+        return db.query(Test).all()
+
+    def create_test(
+            db: Session,
+            time: int = 45,
+            current_user: User = Depends(get_currentUser)):
+        db_test = Test(time=time, id_user=current_user.id)
+        db.add(db_test)
+        db.commit()
+
+        db.refresh(db_test)
+        return db_test
 
     # def get_user(email: str, db: Session = Depends(get_db)):
     #     return db.query(Chapter).filter(Chapter.email == email).first()
