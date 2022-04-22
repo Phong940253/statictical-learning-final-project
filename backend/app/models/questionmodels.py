@@ -20,6 +20,7 @@ class Question(Base):
     order = Column(Integer, default=0)
     create_at = Column(DateTime, server_default=func.now())
     update_at = Column(DateTime, onupdate=func.now())
+    correct = Column(Boolean, default=False)
 
     questioncontent = relationship(
         "QuestionContent",

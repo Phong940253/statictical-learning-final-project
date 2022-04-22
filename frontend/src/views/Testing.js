@@ -113,6 +113,17 @@ const Testing = () => {
 
   const handleSubmitFormTest = (e) => {
     e.preventDefault();
+    let list_answer = [];
+    question.map((item) => {
+      list_answer.push({
+        id: item.Question.id,
+        answer: e.target["question-radio-" + item.Question.id].value,
+      });
+    });
+
+    const test_payload = {
+      list_answer: list_answer,
+    };
   };
 
   const handleSubmitForm = (e) => {

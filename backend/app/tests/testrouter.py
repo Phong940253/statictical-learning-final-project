@@ -4,12 +4,12 @@ from models.questioncontentmodels import QuestionContent
 from models.questionmodels import Question
 from config.database import get_db
 from dto.sectionschema import SectionId
+from dto.testschema import TestValid
 from .testservice import TestService
 from sqlalchemy import select
 from sqlalchemy.sql import func
-from models.noidungmodels import NoiDung
 from models.sectionmodels import Section
-from typing import List
+from models.testmodels import Test
 
 router = APIRouter(prefix="/tests", tags=["Tests"])
 
@@ -47,8 +47,32 @@ def create_test(
         QuestionContent.answer_d).join(Section).join(Question).filter(
         Question.id_test == db_test.id).all(),
         "test": db_test}
-    # [db.refresh(question) for question in list_question]
-    return list_question
+
+
+@router.post("/{id_test}")
+def update_test(
+        test: TestValid,
+        id_test: int,
+        db: Session = Depends(get_db)):
+    db_test = db.query(Question, QuestionContent.correct_answer).join(
+        QuestionContent).join(Test).filter(Test.id == id_test).all()
+    num_correct_answer = 0
+    for question in db_test:
+        answer_client = None
+        for answer in test.list_answer:
+            if answer["id"] == question.Question.id:
+                answer_client = answer
+                break
+        if answer_client is not None:
+            if answer_client["answer"] == question.correct_answer:
+                question.Question.correct = True
+                num_correct_answer += 1
+            else:
+                question.Question.correct = False
+    db_test1 = db.query(Test).filter(Test.id == id_test).first()
+    db_test1.score = num_correct_answer / len(db_test) * 10
+    db.commit()
+    return db_test
 
 
 # @router.get("/me")
