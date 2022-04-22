@@ -72,7 +72,10 @@ def update_test(
     db_test1 = db.query(Test).filter(Test.id == id_test).first()
     db_test1.score = num_correct_answer / len(db_test) * 10
     db.commit()
-    return db_test
+    db.refresh(db_test1)
+    score = float(num_correct_answer / len(db_test)) * 10
+
+    return {'score': score}
 
 
 # @router.get("/me")

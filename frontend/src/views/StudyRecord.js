@@ -370,6 +370,61 @@ const StudyRecord = () => {
           </div>
         </CardBody>
       </Card>
+      T T Phương Vi
+      <Card className="bg-secondary shadow  m-xl-4">
+        <CardHeader className="bg-white border-0">
+          <Row>
+            <Col className="text-left" xs="4">
+              <h4>Exam details</h4>
+            </Col>
+            <Col className="text-right" xs="8">
+              <Button className="align-self-end" color="info" type="submit">
+                Review
+              </Button>
+              <Button className="align-self-end" color="info" type="submit">
+                Practive
+              </Button>
+            </Col>
+          </Row>
+        </CardHeader>
+        <CardBody>
+          <Card>
+            <Row>
+              <Col xs="2">
+                <text>ttphuongvi</text>
+              </Col>
+              <Col xs="2">
+                <div>1.7</div>
+                <text>Total right answer</text>
+                <div>5/30</div>
+              </Col>
+              <Col xs="5">
+                <span>Ứng dụng đạo hàm để khảo sát và vẽ đồ thị hàm số</span>
+                <Row>
+                  <Col xs="4">
+                    <text>Grade</text>
+                    <div>Grade 12</div>
+                    <div>Duration</div>
+                    <text>45m</text>
+                  </Col>
+                  <Col xs="4">
+                    <text>Grade</text>
+                    <div>Grade 12</div>
+                    <div>Duration</div>
+                    <text>45m</text>
+                  </Col>
+                  <Col xs="4">
+                    <text>Grade</text>
+                    <div>Grade 12</div>
+                    <div>Duration</div>
+                    <text>45m</text>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+          </Card>
+        </CardBody>
+      </Card>
     </>
   );
 };

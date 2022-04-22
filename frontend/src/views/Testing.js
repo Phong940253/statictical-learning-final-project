@@ -124,6 +124,15 @@ const Testing = () => {
     const test_payload = {
       list_answer: list_answer,
     };
+    axios
+      .post("/tests/" + test.id, test_payload)
+      .then((res) => {
+        if (res.data) {
+          console.log(res.data);
+          alert(res.data.score);
+        }
+      })
+      .catch((err) => {});
   };
 
   const handleSubmitForm = (e) => {
